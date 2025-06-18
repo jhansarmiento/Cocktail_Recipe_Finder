@@ -3,23 +3,22 @@ import { NavLink, useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
-
-  const isActive = useMemo(() => pathname === "/", [pathname]);
+  const isHome = useMemo(() => pathname === "/", [pathname]);
 
   return (
     <header>
-      <div className="bg-gray-950">
+      <div className={isHome ? 'bg-[url(/Cocktail_Bg.webp)] bg-center bg-cover' : 'bg-gray-950'}>
         <div className="mx-auto container px-4 py-6">
           <div className="flex justify-between items-center">
             <img src="/logo.svg" alt="" className="w-16" />
 
-            <nav className="flex gap-6">
+            <nav className="flex gap-3">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-500 font-bold uppercase"
-                    : "text-white font-bold uppercase"
+                    ? "text-orange-700 font-extrabold uppercase px-3 py-3 bg-white/30 backdrop-blur-lg rounded-lg"
+                    : "text-white font-bold uppercase px-3 py-3"
                 }
               >
                 Home
@@ -28,8 +27,8 @@ export default function Header() {
                 to="/favorites"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-500 font-bold uppercase"
-                    : "text-white font-bold uppercase"
+                    ? "text-orange-500 font-bold uppercase px-3 py-3 bg-white/15 backdrop-blur-lg rounded-lg"
+                    : "text-white font-bold uppercase px-3 py-3"
                 }
               >
                 Favorites
@@ -37,8 +36,8 @@ export default function Header() {
             </nav>
           </div>
 
-          {isActive && (
-            <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl bg-orange-400 space-y-6">
+          {isHome && (
+            <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl backdrop-blur-lg space-y-6">
               <div className="space-y-4">
                 <label
                   htmlFor="ingredient"
@@ -68,7 +67,7 @@ export default function Header() {
               <input 
                 type="submit" 
                 value="Search Recipes"
-                className="cursor-pointer w-full bg-orange-800 hover:bg-orange-900 rounded-lg p-2 text-white uppercase font-extrabold"
+                className="cursor-pointer w-full bg-white/40 backdrop-blur-xl rounded-lg p-2 text-white uppercase font-extrabold"
                 />
             </form>
           )}
