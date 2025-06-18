@@ -1,9 +1,15 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppStore } from "../stores/useAppStore";
 
 export default function Header() {
   const { pathname } = useLocation();
   const isHome = useMemo(() => pathname === "/", [pathname]);
+
+  const fetchCategories= useAppStore((state) => state.fetchCategories)
+  useEffect(() => {
+    fetchCategories()
+  }, [])
 
   return (
     <header>
@@ -17,7 +23,7 @@ export default function Header() {
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-700 font-extrabold uppercase px-3 py-3 bg-white/30 backdrop-blur-lg rounded-lg"
+                    ? "text-orange-700 font-extrabold uppercase px-3 py-3 backdrop-blur-xl rounded-lg"
                     : "text-white font-bold uppercase px-3 py-3"
                 }
               >
@@ -27,7 +33,7 @@ export default function Header() {
                 to="/favorites"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-500 font-bold uppercase px-3 py-3 bg-white/15 backdrop-blur-lg rounded-lg"
+                    ? "text-orange-500 font-bold uppercase px-3 py-3 bg-white/15 backdrop-blur-xl rounded-lg"
                     : "text-white font-bold uppercase px-3 py-3"
                 }
               >
@@ -37,7 +43,7 @@ export default function Header() {
           </div>
 
           {isHome && (
-            <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl backdrop-blur-lg space-y-6">
+            <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl">
               <div className="space-y-4">
                 <label
                   htmlFor="ingredient"
@@ -50,7 +56,7 @@ export default function Header() {
                   name="ingredient"
                   id="ingredient"
                   placeholder="Name or ingredient. e.g. Vodka, Tequila, coffee"
-                  className="focus:outline-none bg-white p-3 rounded-lg w-full"
+                  className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
                 />
                 <label 
                     htmlFor="category"
@@ -59,7 +65,7 @@ export default function Header() {
                 <select 
                     name="category" 
                     id="category"
-                    className="focus:outline-none bg-white p-3 rounded-lg w-full"
+                    className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
                 >
                     <option value="">-- Select a category --</option>
                 </select>
@@ -67,7 +73,7 @@ export default function Header() {
               <input 
                 type="submit" 
                 value="Search Recipes"
-                className="cursor-pointer w-full bg-white/40 backdrop-blur-xl rounded-lg p-2 text-white uppercase font-extrabold"
+                className="cursor-pointer w-full bg-white rounded-lg p-2 text-gray-950 uppercase font-extrabold"
                 />
             </form>
           )}
