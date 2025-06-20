@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppStore } from "../stores/useAppStore";
+import HeaderForm from "./HeaderForm";
 
 export default function Header() {
   const { pathname } = useLocation();
   const isHome = useMemo(() => pathname === "/", [pathname]);
 
   const fetchCategories = useAppStore((state) => state.fetchCategories)
-  const categories = useAppStore( state => state.categories)
 
   useEffect(() => {
     fetchCategories()
@@ -16,7 +16,9 @@ export default function Header() {
   return (
     <header>
       <div className={isHome ? 'bg-[url(/Cocktail_Bg.webp)] bg-center bg-cover' : 'bg-gray-950'}>
+      
         <div className="mx-auto container px-4 py-6">
+
           <div className="flex justify-between items-center">
             <img src="/logo.svg" alt="" className="w-16" />
 
@@ -44,41 +46,8 @@ export default function Header() {
             </nav>
           </div>
 
-          {isHome && (
-            <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl">
-              <div className="space-y-4">
-                <label
-                  htmlFor="ingredient"
-                  className="block text-white font-extrabold uppercase"
-                >
-                  Name or Ingredient
-                </label>
-                <input
-                  type="text"
-                  name="ingredient"
-                  id="ingredient"
-                  placeholder="Name or ingredient. e.g. Vodka, Tequila, coffee"
-                  className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
-                />
-                <label 
-                    htmlFor="category"
-                    className="block text-white font-extrabold uppercase"
-                >Category</label>
-                <select 
-                    name="category" 
-                    id="category"
-                    className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
-                >
-                    <option value="">-- Select a category --</option>
-                </select>
-              </div>
-              <input 
-                type="submit" 
-                value="Search Recipes"
-                className="cursor-pointer w-full bg-white rounded-lg p-2 text-gray-950 uppercase font-extrabold"
-                />
-            </form>
-          )}
+          {isHome && <HeaderForm/>}
+          
         </div>
       </div>
     </header>
