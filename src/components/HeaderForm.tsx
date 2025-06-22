@@ -1,9 +1,22 @@
 import { useAppStore } from "../stores/useAppStore";
+import { useState, type ChangeEvent } from "react";
 
 export default function HeaderForm() {
 
     const categories = useAppStore(state => state.categories)
-    
+
+    const [searchFilters, setSearchFilters] = useState({
+            ingredient: '',
+            category: ''
+    })
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
+        setSearchFilters({
+            ...searchFilters,
+            [e.target.name] : e.target.value
+        })
+    }
+
   return (
     <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl">
       <div className="space-y-4">
@@ -15,10 +28,12 @@ export default function HeaderForm() {
         </label>
         <input
           type="text"
-          name="ingredient"
           id="ingredient"
           placeholder="Name or ingredient. e.g. Vodka, Tequila, coffee"
           className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
+          name="ingredient"
+          value={searchFilters.ingredient}
+          onChange={handleChange}
         />
         <label
           htmlFor="category"
@@ -27,9 +42,11 @@ export default function HeaderForm() {
           Category
         </label>
         <select
-          name="category"
           id="category"
           className="focus:outline-none bg-white/40 backdrop-blur-lg p-3 rounded-lg w-full"
+          name="category"
+          value={searchFilters.category}
+          onChange={handleChange}
         >
           <option value="">-- Select a category --</option>
           {categories.drinks.map((category) => (
