@@ -1,9 +1,10 @@
 import { useAppStore } from "../stores/useAppStore";
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 export default function HeaderForm() {
 
     const categories = useAppStore(state => state.categories)
+    const searchRecipes = useAppStore(state => state.searchRecipes)
 
     const [searchFilters, setSearchFilters] = useState({
             ingredient: '',
@@ -17,8 +18,23 @@ export default function HeaderForm() {
         })
     }
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        // TODO: validate function will be reusable
+        if(Object.values(searchFilters).includes('')) {
+            console.log('All fields are mandatory')
+            return
+        }
+
+        searchRecipes(searchFilters)
+    }
+
   return (
-    <form className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl">
+    <form 
+        className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl"
+        onSubmit={handleSubmit}
+    >
       <div className="space-y-4">
         <label
           htmlFor="ingredient"
