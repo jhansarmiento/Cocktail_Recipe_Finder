@@ -8,7 +8,7 @@ type DrinkCardProps = {
 export default function DrinkCard({drink} : DrinkCardProps) {
   return (
     <>
-      <h1 className="mt-2">{drink.strDrink}</h1>
+      <h1 className="text-white mt-2">{drink.strDrink}</h1>
     </>
   )
 }

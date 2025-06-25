@@ -32,7 +32,8 @@ export default function HeaderForm() {
 
   return (
     <form 
-        className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl shadow-lg/35"
+        className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-8 
+                bg-white/5 backdrop-blur-xl shadow-lg/35 border border-white/30"
         onSubmit={handleSubmit}
     >
       <div className="space-y-4">
@@ -75,7 +76,7 @@ export default function HeaderForm() {
       <input
         type="submit"
         value="Search Recipes"
-        className="cursor-pointer w-full bg-white rounded-lg p-2 text-gray-950 uppercase font-extrabold"
+        className="cursor-pointer w-full rounded-lg p-2 text-gray-950 uppercase font-extrabold bg-white/90"
       />
     </form>
   );

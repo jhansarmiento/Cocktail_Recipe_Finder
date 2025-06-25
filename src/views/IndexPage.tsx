@@ -10,8 +10,8 @@ export default function IndexPage() {
 
   return (
 
-    <>
-        <h1 className="text-5xl font-extrabold mt-4">Recipes</h1>
+    <main className="mx-auto container py-6">
+        <h1 className="text-white text-5xl font-extrabold mt-4">Recipes</h1>
         { hasDrinks ? (
           <>
             {drinks.drinks.map(drink => (
@@ -22,8 +22,10 @@ export default function IndexPage() {
             ))}
           </>
         ) : (
-          <h2 className="text-center text-xl mt-8">There are still no recipes to display, please use the form to search for recipes.</h2>
+          <h2 
+            className=" text-white text-center text-xl mt-8"
+          >There are still no recipes to display, please use the form to search for recipes.</h2>
         )}
-    </>
+    </main>
   )
 }

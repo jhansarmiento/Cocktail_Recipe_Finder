@@ -4,10 +4,12 @@ import Header from "../components/Header";
 export default function Layout() {
   return (
     <>
-      <Header />
-      <main className="mx-auto container py-6">
-        <Outlet />
-      </main>
+      <div className="min-h-screen bg-[url(/Cocktail_gradient_bg.webp)] bg-fixed bg-cover bg-no-repeat">
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </>
-  )
+  );
 }
