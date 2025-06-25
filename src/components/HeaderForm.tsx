@@ -32,7 +32,7 @@ export default function HeaderForm() {
 
   return (
     <form 
-        className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl"
+        className="md:w-1/2 2xl:w-1/3 my-10 p-10 rounded-xl space-y-6 backdrop-blur-xl shadow-lg/35"
         onSubmit={handleSubmit}
     >
       <div className="space-y-4">
