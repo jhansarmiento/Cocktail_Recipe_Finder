@@ -13,14 +13,16 @@ export default function IndexPage() {
     <main className="mx-auto container py-6">
         <h1 className="text-white text-5xl font-extrabold mt-4">Recipes</h1>
         { hasDrinks ? (
-          <>
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-10 gap-10"
+          >
             {drinks.drinks.map(drink => (
               <DrinkCard 
                 key={drink.idDrink}
                 drink={drink}
               />
             ))}
-          </>
+          </div>
         ) : (
           <h2 
             className=" text-white text-center text-xl mt-8"
