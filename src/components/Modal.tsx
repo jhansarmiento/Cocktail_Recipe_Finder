@@ -1,13 +1,33 @@
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { Fragment } from 'react';
 import { useAppStore } from '../stores/useAppStore';
+import type { Recipe } from '../types';
 
 export default function Modal() {
 
     const modal = useAppStore(state => state.modal)
     const closeModal = useAppStore(state => state.closeModal)
-
     const selectedRecipe = useAppStore(state => state.selectedRecipe)
+
+    const renderIngredients = () => {
+        const ingredients : React.JSX.Element[] = []
+
+        for( let i = 1; i <= 10 ; i++) {
+            const ingredient = selectedRecipe[`strIngredient${i}` as keyof Recipe]
+            const measure = selectedRecipe[`strMeasure${i}` as keyof Recipe]
+
+            if( ingredient && measure) {
+                ingredients.push(
+                    <li 
+                        key={i}
+                        className='text-white text-base list-decimal font-light pl-3'
+                    >{ingredient} - {measure}</li>
+                )
+            }
+        }
+
+        return ingredients
+    }
 
     return (
         <>
@@ -50,10 +70,11 @@ export default function Modal() {
                             <DialogTitle as="h3" className="text-white text-xl font-bold my-3">
                                 Ingredients & Measures:
                             </DialogTitle>
+                                {renderIngredients()}
                             <DialogTitle as="h3" className="text-white text-xl font-bold my-3">
                                 Instructions:
                             </DialogTitle>
-                            <p className='text-white pl-2'>{selectedRecipe.strInstructions}</p>
+                            <p className='text-white pl-3'>{selectedRecipe.strInstructions}</p>
                         </DialogPanel>
                     </TransitionChild>
                     </div>
